@@ -63,6 +63,16 @@ function App() {
       //Backbone js Code
       var item = new ItemView();
       const result = await item.addLocation(form.locationName,form.units)
+      if(result.cod!==200){
+        alert(result.message)
+        setForm({});
+      setActionModal({
+        ...isActionModalOpen,
+        isOpen: false,
+        action: "",
+      });
+        return;
+      }
       const res = weatherData.data.filter(item=>item.id!==form.id)
       setWeatherData((prev)=>({
         isLoading: false,
